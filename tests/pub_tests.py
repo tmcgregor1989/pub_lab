@@ -9,9 +9,10 @@ class TestPub(unittest.TestCase):
     
     def setUp(self):
         self.pub = Pub("The Park Bar", 300.00, ["Tennents", "Guinness"])
-        self.drink1 = Drink("wine", 7.50)
+        self.drink = Drink("wine", 7.50)
         self.drink2 = Drink("vodka", 2.00)
         self.customer = Customer("Trevor", 50, 24)
+        self.customer2 = Customer("Jane", 10, 17)
     def test_pub_has_name(self):
         self.assertEqual("The Park Bar", self.pub.name)
 
@@ -21,15 +22,20 @@ class TestPub(unittest.TestCase):
 
 
     def test_sell_drink(self):
-        customer = Customer("John", 100, 56)
-        drink = Drink("whisky", 5)
+      
     
-        self.pub.sell_drink(drink, customer)
-        self.assertEqual(95, customer.wallet)
-        self.assertEqual(305, self.pub.till)
+        self.pub.sell_drink(self.drink, self.customer)
+        self.assertEqual(42.50, self.customer.wallet)
+        self.assertEqual(307.50, self.pub.till)
         
-    def test_check_customer_age(self):
-        customer = Customer("john", 100, 56)
+   
 
-        self.pub.check_customer_age(customer)
-        self.assertEqual
+    def test_sell_drink_age_check_ok(self):
+        self.pub.sell_drink_age_check(self.drink, self.customer)
+        self.assertEqual(42.50, self.customer.wallet)
+        self.assertEqual(307.50, self.pub.till)
+
+    def test_sell_drink_age_check_too_young(self):
+        self.pub.sell_drink_age_check(self.drink, self.customer2)
+        self.assertEqual(10.00, self.customer2.wallet)
+        self.assertEqual(300.00, self.pub.till)
