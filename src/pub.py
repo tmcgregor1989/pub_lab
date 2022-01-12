@@ -17,7 +17,7 @@ class Pub:
         self.increase_till(drink.price)
 
 
-      
+    
 
         
 
